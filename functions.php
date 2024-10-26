@@ -9,6 +9,10 @@ if (!defined('ABSPATH')) exit;
 define("F_INC", 10);
 
 
+/* Включаем блоки */
+//include "blocks/Container.php";
+
+
 /**
  * Настройка темы
  * https://wp-kama.ru/function/add_theme_support
@@ -55,6 +59,13 @@ add_action('after_setup_theme', function(){
 	
 	
 	/**
+	 * Добавить возможность редактировать блоки
+	 */
+	add_theme_support('block-template');
+	add_theme_support('block-template-parts');
+	
+	
+	/**
 	 * Добавляет возможность изменять фон из админки
 	 */
 	add_theme_support('custom-background');
@@ -64,6 +75,20 @@ add_action('after_setup_theme', function(){
 	 * Enable Menus
 	 */
 	add_theme_support('menus');
+});
+
+
+/**
+ * Регистрация css
+ */
+add_action('wp_enqueue_scripts', function(){
+	wp_register_style(
+		'main-style-css',
+		get_template_directory_uri() . '/style.css',
+		array(),
+		F_INC
+	);
+	wp_enqueue_style('main-style-css');
 });
 
 
@@ -88,12 +113,15 @@ add_action('widgets_init', function(){
 
 
 /**
- * Site origin fix
+ * Disable editor title
  */
 add_action('admin_head', function(){
 	echo '<style>
-	.so-panels-live-editor .so-preview {
-		background-color: white !important;
-	} 
+	.editor-post-title__input {
+		display: none;
+	}
+	.editor-visual-editor__post-title-wrapper{
+		margin-top: 0px !important;
+	}
 	</style>';
 });

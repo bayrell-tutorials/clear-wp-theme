@@ -1,0 +1,18 @@
+{
+	"version": 2,
+	"$schema": "https://schemas.wp.org/wp/6.3/theme.json",
+	"settings": {
+	},
+    "templateParts": [
+		{
+			"name": "main_header",
+			"title": "Header",
+			"area": "header"
+		},
+		{
+			"name": "main_footer",
+			"title": "Footer",
+			"area": "footer"
+		}
+	]
+}
